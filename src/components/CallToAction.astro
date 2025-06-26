@@ -1,0 +1,71 @@
+---
+// src/components/CallToAction.astro
+// 定义常量，用于链接到 GitHub Releases 页面和项目仓库
+const RELEASES_URL = "https://github.com/xicheng2003/text-based-robot-trajectory-control/releases";
+const REPO_URL = "https://github.com/xicheng2003/text-based-robot-trajectory-control";
+---
+
+<section class="py-20 sm:py-32">
+    <div class="max-w-4xl mx-auto text-center px-4">
+
+        {/* 主标题 (字体已调小) */}
+        <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
+            立即下载
+        </h2>
+
+        {/* 副标题 (已同步主标题字体样式) */}
+        <p class="mt-3 text-lg font-bold tracking-tight text-slate-400 max-w-2xl mx-auto">
+            体验令人惊叹的控制交互
+        </p>
+        
+        {/* 主要操作按钮 (尺寸已增大) */}
+        <div class="mt-6 flex justify-center">
+            <a 
+                href={RELEASES_URL} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="group inline-flex items-center justify-center rounded-lg py-5 px-8 text-base font-semibold focus:outline-none transition-all duration-300 bg-white text-slate-900 hover:bg-slate-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-white w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+                {/* GitHub Icon SVG (尺寸已增大) */}
+                <svg
+                    class="h-12 w-12 flex-none mr-5"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.397.1 2.65.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                    ></path>
+                </svg>
+
+                {/* 按钮内文字 (尺寸已增大) */}
+                <div class="text-left">
+                    <span class="block text-base font-medium">前往 GitHub Releases</span>
+                    <span class="block text-xl font-bold">下载最新版本</span>
+                </div>
+            </a>
+        </div>
+
+        {/* 辅助说明和次要链接 */}
+        <div class="mt-8 text-center space-y-2">
+            <p class="text-sm text-slate-500">
+                点击上方按钮，从 GitHub 获取最新版本。
+            </p>
+            <p class="text-sm text-slate-500">
+                或者, 
+                <a 
+                    href={REPO_URL}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="font-medium text-sky-400 hover:text-sky-300 underline underline-offset-4"
+                >
+                    在 GitHub 上查看项目源码
+                </a>
+                。
+            </p>
+        </div>
+
+    </div>
+</section>

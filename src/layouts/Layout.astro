@@ -1,22 +1,40 @@
+---
+// src/layouts/Layout.astro
+// 这是您网站的全局布局文件。
+
+// 1. 导入 Background 组件，以便在布局中使用。
+import Background from '../components/Background.astro';
+
+// 2. 定义此布局期望从每个页面接收的属性（Props）。
+interface Props {
+	title: string;
+	description: string;
+}
+
+// 3. 从 Astro.props 中获取具体页面传入的 title 和 description。
+const { title, description } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
-	<body>
+
+	<body class="bg-slate-900 text-slate-200 font-sans relative">
+		
+		{/* 4. 将背景组件放置在所有页面内容的最底层。 */}
+		<Background />
+		
+		{/* 5. <slot /> 是一个特殊的 Astro 组件，
+		  它会把使用此布局的任何页面（如 index.astro）的内容渲染到这个位置。
+		  这使得 <Background /> 成为了所有页面的共享背景。
+		*/}
 		<slot />
+
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

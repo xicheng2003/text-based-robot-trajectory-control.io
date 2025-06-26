@@ -1,0 +1,99 @@
+---
+// src/components/Hero.astro
+const commandText = `让关节1转动30度，然后把速度设为50.
+再让X轴前进100毫米，最后全轴回零。`;
+---
+<section class="text-center py-16 px-4 overflow-x-hidden">
+    <!-- 顶部的标题和描述部分保持不变 -->
+    <div class="space-y-4">
+        <div class="inline-block rounded-lg bg-slate-800 p-3 border border-slate-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400">
+                <path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
+            </svg>
+        </div>
+        <h1 class="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
+            <span class="bg-gradient-to-r from-slate-50 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                基于文本
+            </span>
+            的机器人轨迹控制
+        </h1>
+        <p class="max-w-2xl mx-auto text-lg text-slate-400">
+            赋予机器人理解自然语言的能力，通过简单的文字指令，实现精准的轨迹运动控制。
+        </p>
+    </div>
+
+    <!-- 动画指令输入框 -->
+    <div id="animated-terminal" class="mt-12 max-w-2xl mx-auto text-left opacity-0 translate-y-4 transition-all duration-700 ease-out">
+        
+        <div class="relative bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-lg border border-slate-700">
+            <div class="p-6 font-mono text-slate-200 text-base min-h-[120px]">
+                <pre><code id="command-output"></code><span id="cursor" class="blink">▋</span></pre>
+            </div>
+        </div>
+
+        <!-- "Powered by DeepSeek" 说明 -->
+        <div class="mt-4 flex justify-center items-center space-x-2 text-sm text-slate-500">
+            <span>可使用自然语言进行控制，由</span>
+            <!-- 核心修改：将SVG替换为img标签 -->
+            <a href="https://www.deepseek.com/" target="_blank" rel="noopener noreferrer" class="inline-block hover:opacity-80 transition-opacity">
+                 <img src="https://cdn.deepseek.com/logo.png?x-image-process=image%2Fresize%2Cw_1920" alt="DeepSeek Logo" class="h-4 w-auto">
+            </a>
+            <span>强力驱动</span>
+        </div>
+    </div>
+</section>
+
+<!-- CSS样式: 定义光标的闪烁动画 (保持不变) -->
+<style>
+.blink {
+  animation: blink-animation 1s step-end infinite;
+  -webkit-animation: blink-animation 1s step-end infinite;
+}
+@keyframes blink-animation {
+  from, to { color: transparent; }
+  50% { color: #0ea5e9; } /* 天蓝色光标 */
+}
+@-webkit-keyframes blink-animation {
+  from, to { color: transparent; }
+  50% { color: #0ea5e9; } /* 天蓝色光标 */
+}
+</style>
+
+<!-- JS脚本: 控制打字机动画 (保持不变) -->
+<script define:vars={{ commandText }}>
+    // 当文档加载完成后执行
+    document.addEventListener('DOMContentLoaded', () => {
+        const terminalElement = document.getElementById('animated-terminal');
+        const codeElement = document.getElementById('command-output');
+        const cursorElement = document.getElementById('cursor');
+        
+        if (!terminalElement || !codeElement || !cursorElement) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    terminalElement.style.opacity = '1';
+                    terminalElement.style.transform = 'translateY(0)';
+                    
+                    let i = 0;
+                    cursorElement.style.display = 'inline'; 
+
+                    function typeWriter() {
+                        if (i < commandText.length) {
+                            codeElement.innerHTML += commandText.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, Math.random() * 100 + 50);
+                        } else {
+                            cursorElement.style.display = 'inline';
+                        }
+                    }
+                    
+                    setTimeout(typeWriter, 700);
+                    observer.unobserve(terminalElement);
+                }
+            });
+        }, { threshold: 0.5 }); 
+
+        observer.observe(terminalElement);
+    });
+</script>

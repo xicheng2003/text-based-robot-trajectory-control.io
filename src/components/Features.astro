@@ -1,0 +1,113 @@
+---
+// src/components/Features.astro
+
+const features = [
+  {
+    title: "双模指令系统",
+    subtitle: "Dual-Mode Command System",
+    description: [
+      "由 DeepSeek LLM 强力驱动，可直接理解并执行复杂的日常语言指令。",
+      "优先解析精确的文本指令确保脚本执行效率，失败后则无缝回退至自然语言解析。"
+    ],
+    icon: "dual-mode"
+  },
+  {
+    title: "全新现代化UI",
+    subtitle: "All-new Modern UI",
+    description: [
+      "前端界面已使用 Vue 3、Vite 和 TypeScript 进行了彻底重构。",
+      "所有组件均由 shadcn/ui 和 Tailwind CSS 构建，提供了专业、美观且响应迅速的操作体验。"
+    ],
+    icon: "ui"
+  },
+  {
+    title: "个性化与易用性",
+    subtitle: "Customization & Usability",
+    description: [
+        "内置明亮/暗黑模式一键切换，并内嵌可折叠的“严格指令参考”组件方便查阅。",
+        "打包程序一键启动，可自动打开默认浏览器并加载控制界面，极大简化了使用流程。"
+    ],
+    icon: "usability"
+  },
+  {
+    title: "后端集成与部署简易",
+    subtitle: "Robust Backend & Deployment",
+    description: [
+        "已使用 PyInstaller 将整个应用打包为独立可执行文件，用户无需安装任何依赖即可运行。",
+        "通过外部 config.json 文件管理所有关键配置，实现了程序与配置的完全分离。"
+    ],
+    icon: "deployment"
+  },
+];
+
+// 核心改动：将特性数据预先分成左右两列
+const leftFeatures = features.filter((_, i) => i % 2 === 0);
+const rightFeatures = features.filter((_, i) => i % 2 !== 0);
+---
+
+<section class="max-w-6xl mx-auto px-4 py-20">
+    <!-- Slogan 保持不变 -->
+    <h2 class="text-4xl font-bold text-center mb-20 text-slate-100">指令之间，智能与精准共生</h2>
+
+    <!-- 
+      核心改动:
+      - 回归 Grid 布局，但结构更清晰。
+      - 父容器是 Grid，内含两个 div 分别代表左右两列。
+    -->
+    <div class="grid md:grid-cols-2 gap-8">
+        <!-- 左列容器 -->
+        <div class="space-y-8">
+            {leftFeatures.map((feature) => (
+                <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
+                            {feature.icon === 'dual-mode' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>}
+                            {feature.icon === 'usability' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>}
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">{feature.title}</h3>
+                            <p class="text-sm text-slate-400">{feature.subtitle}</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 text-slate-300">
+                        {feature.description.map(point => (
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-3 mt-1.5 text-cyan-400 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>{point}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
+
+        <!-- 
+          右列容器 
+          - 核心中的核心: `md:mt-25` 应用在整个列容器上，实现整体下移
+        -->
+        <div class="space-y-8 md:mt-20">
+            {rightFeatures.map((feature) => (
+                <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
+                           {feature.icon === 'ui' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>}
+                           {feature.icon === 'deployment' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>}
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">{feature.title}</h3>
+                            <p class="text-sm text-slate-400">{feature.subtitle}</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 text-slate-300">
+                        {feature.description.map(point => (
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-3 mt-1.5 text-cyan-400 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                                <span>{point}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
