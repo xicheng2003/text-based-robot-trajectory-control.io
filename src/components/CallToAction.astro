@@ -8,27 +8,34 @@ const REPO_URL = "https://github.com/xicheng2003/text-based-robot-trajectory-con
 <section class="py-20 sm:py-32">
     <div class="max-w-4xl mx-auto text-center px-4">
 
-        {/* 主标题 (字体已调小) */}
+        {/* 主标题 */}
         <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">
             立即下载
         </h2>
 
-        {/* 副标题 (已同步主标题字体样式) */}
+        {/* 副标题 */}
         <p class="mt-3 text-lg font-bold tracking-tight text-slate-400 max-w-2xl mx-auto">
             体验令人惊叹的控制交互
         </p>
         
-        {/* 主要操作按钮 (尺寸已增大) */}
+        {/* 主要操作按钮 */}
         <div class="mt-6 flex justify-center">
             <a 
                 href={RELEASES_URL} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="group inline-flex items-center justify-center rounded-lg py-5 px-8 text-base font-semibold focus:outline-none transition-all duration-300 bg-white text-slate-900 hover:bg-slate-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-white w-full sm:w-auto shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                {/* -- MODIFIED --
+                  1. 移除了 w-full 和 sm:w-auto，解决了小屏强制拉伸的问题。
+                  2. 将内边距 py-5 px-8 修改为响应式：默认为 py-3 px-6，在中等屏幕(md)及以上恢复为 py-5 px-8。
+                */}
+                class="group inline-flex items-center justify-center rounded-lg py-3 px-6 md:py-5 md:px-8 text-base font-semibold focus:outline-none transition-all duration-300 bg-white text-slate-900 hover:bg-slate-200 focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-white shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-                {/* GitHub Icon SVG (尺寸已增大) */}
+                {/* -- MODIFIED --
+                  GitHub Icon SVG: 尺寸修改为响应式，默认为 h-8 w-8，在中等屏幕(md)及以上变为 h-12 w-12。
+                  同时调整了右边距(mr)
+                */}
                 <svg
-                    class="h-12 w-12 flex-none mr-5"
+                    class="h-8 w-8 md:h-12 md:w-12 flex-none mr-3 md:mr-5"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
@@ -40,10 +47,12 @@ const REPO_URL = "https://github.com/xicheng2003/text-based-robot-trajectory-con
                     ></path>
                 </svg>
 
-                {/* 按钮内文字 (尺寸已增大) */}
+                {/* -- MODIFIED --
+                  按钮内文字: 字体大小修改为响应式。
+                */}
                 <div class="text-left">
-                    <span class="block text-base font-medium">前往 GitHub Releases</span>
-                    <span class="block text-xl font-bold">下载最新版本</span>
+                    <span class="block text-sm md:text-base font-medium">前往 GitHub Releases</span>
+                    <span class="block text-lg md:text-xl font-bold">下载最新版本</span>
                 </div>
             </a>
         </div>

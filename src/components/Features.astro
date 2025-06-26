@@ -40,22 +40,21 @@ const features = [
   },
 ];
 
-// 核心改动：将特性数据预先分成左右两列
+// 将特性数据预先分成左右两列
 const leftFeatures = features.filter((_, i) => i % 2 === 0);
 const rightFeatures = features.filter((_, i) => i % 2 !== 0);
 ---
 
 <section class="max-w-6xl mx-auto px-4 py-20">
-    <!-- Slogan 保持不变 -->
-    <h2 class="text-4xl font-bold text-center mb-20 text-slate-100">指令之间，智能与精准共生</h2>
+    {/* -- MODIFIED -- Slogan 响应式优化 */}
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-20 text-slate-100">指令之间，智能与精准共生</h2>
 
-    <!-- 
+    {/*
       核心改动:
       - 回归 Grid 布局，但结构更清晰。
       - 父容器是 Grid，内含两个 div 分别代表左右两列。
-    -->
+    */}
     <div class="grid md:grid-cols-2 gap-8">
-        <!-- 左列容器 -->
         <div class="space-y-8">
             {leftFeatures.map((feature) => (
                 <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
@@ -81,10 +80,6 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
             ))}
         </div>
 
-        <!-- 
-          右列容器 
-          - 核心中的核心: `md:mt-25` 应用在整个列容器上，实现整体下移
-        -->
         <div class="space-y-8 md:mt-20">
             {rightFeatures.map((feature) => (
                 <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">

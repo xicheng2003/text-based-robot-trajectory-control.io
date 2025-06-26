@@ -1,18 +1,23 @@
 ---
-const GITHUB_URL = "https://github.com/xicheng2003/text-based-robot-trajectory-control";
+// src/components/Header.astro
+const REPO_URL = "https://github.com/xicheng2003/text-based-robot-trajectory-control#%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C-how-to-run";
 ---
-<header class="max-w-5xl mx-auto px-4 py-6">
+<header class="max-w-6xl mx-auto px-4 md:px-6 py-4">
     <nav class="flex justify-between items-center">
-        <h1 class="text-xl font-bold">
+        <h1 class="text-lg md:text-xl font-bold text-slate-100">
             Text-based Robot Trajectory Control
         </h1>
         <a 
-            href={GITHUB_URL} 
+            href={REPO_URL} 
             target="_blank" 
             rel="noopener noreferrer"
-            class="bg-slate-700 hover:bg-slate-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+            class="flex items-center bg-slate-700 hover:bg-slate-600 text-white font-medium rounded-lg transition-colors duration-300 text-sm py-1.5 px-3 md:text-base md:py-2 md:px-4"
         >
-            View on GitHub
+            {/* -- MODIFIED -- 图标已从 GitHub Octocat 替换为向右的箭头 */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-2" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+            </svg>
+            <span>快速上手</span>
         </a>
     </nav>
 </header>
