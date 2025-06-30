@@ -6,8 +6,8 @@ const features = [
     title: "双模指令系统",
     subtitle: "Dual-Mode Command System",
     description: [
-      "由 DeepSeek LLM 强力驱动，可直接理解并执行复杂的日常语言指令。",
-      "优先解析精确的文本指令确保脚本执行效率，失败后则无缝回退至自然语言解析。"
+      "由 DeepSeek LLM 强力驱动，可直接理解并执行复杂的日常语言指令（<sup>[2]</sup>自然语言解析）。",
+      "优先解析精确的<sup>[3]</sup>文本指令确保脚本执行效率，失败后则无缝回退至自然语言解析。"
     ],
     icon: "dual-mode"
   },
@@ -34,7 +34,7 @@ const features = [
     subtitle: "Customization & Usability",
     description: [
         "内置明亮/暗黑模式一键切换，并内嵌可折叠的“严格指令参考”组件方便查阅。",
-        "内置快捷分享功能，可即时生成 Web 控制页面的链接和二维码，可随时拿起手中移动设备控制。"
+        "内置<sup>[4]</sup>快捷分享功能，可即时生成 Web 控制页面的链接和二维码，可随时拿起手中移动设备控制。"
     ],
     icon: "usability"
   },
@@ -42,20 +42,29 @@ const features = [
     title: "后端集成与配置简易",
     subtitle: "Robust Backend & Deployment",
     description: [
-        "已将整个应用打包为独立可执行文件，用户无需安装任何依赖，真正实现“开箱即用”。",
+        "已将整个应用打包为独立可执行文件，用户无需安装任何依赖，真正实现“<sup>[5]</sup>开箱即用”。",
         "应用内集成设置页面，可对机器人 IP 地址、默认运动速度以及 LLM API 等关键信息修改，实现了应用内的快速配置。"
     ],
     icon: "deployment"
   },
 ];
 
-// 将特性数据预先分成左右两列
+const specialTerms = [
+  { term: "<sup>[1]</sup>智能与精准", description: "为本项目的设计理念与追求。功能的具体表现与效果，可能受实际运行环境及指令复杂度的影响，最终解释权归本项目所有。" },
+  { term: "<sup>[2]</sup>自然语言解析", description: "为提供便捷体验，系统默认集成并启用 DeepSeek 的 NLP 服务。此默认 API 仅供初步体验，存在速率与调用额度限制。为确保长期稳定使用，强烈建议您在设置中替换为自己的 API Key。" },
+  { term: "<sup>[3]</sup>文本指令", description: "系统支持一套精确的文本指令集以实现高效、可复现的操作。完整的指令列表、语法及用法示例，请参阅应用内控制面板的“严格指令参考”部分。" },
+  { term: "<sup>[4]</sup>快捷分享功能", description: "允许您通过链接或二维码，在同一局域网（LAN）内的其他设备（如手机、平板）上进行控制。请确保所有设备连接至同一 Wi-Fi 网络且连接稳定。" },
+  { term: "<sup>[5]</sup>开箱即用", description: "指应用本身无需安装外部依赖即可运行。首次使用时，仍需在设置页面完成与目标机器人的网络参数（如 IP 地址）配置，以建立通讯连接。" },
+];
+
 const leftFeatures = features.filter((_, i) => i % 2 === 0);
 const rightFeatures = features.filter((_, i) => i % 2 !== 0);
 ---
 
-<section class="max-w-6xl mx-auto px-4 py-20">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-20 text-slate-100">指令之间，智能与精准共生</h2>
+<section class="max-w-6xl mx-auto px-4 pt-20">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-20 text-slate-100">
+        指令之间，<sup class="font-normal">[1]</sup>智能与精准共生
+    </h2>
 
     <div class="grid md:grid-cols-2 gap-8">
         {/* 左侧列 */}
@@ -64,17 +73,9 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
                 <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-                            {/* FIX: 左列只保留 'dual-mode', 'status', 'deployment' 的图标 */}
-                            {feature.icon === 'dual-mode' && (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="M14.5 4L9.5 20"/></svg>
-                            )}
-                            {feature.icon === 'status' && (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect x="3" y="13" width="3.5" height="7" rx="1.5"/><rect x="10.25" y="8" width="3.5" height="12" rx="1.5"/><rect x="17.5" y="3" width="3.5" height="17" rx="1.5"/></svg>
-                            )}
-                            {/* FIX: 将 'deployment' 图标从右列移至此处 */}
-                            {feature.icon === 'deployment' && (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                            )}
+                            {feature.icon === 'dual-mode' && ( <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="M14.5 4L9.5 20"/></svg> )}
+                            {feature.icon === 'status' && ( <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect x="3" y="13" width="3.5" height="7" rx="1.5"/><rect x="10.25" y="8" width="3.5" height="12" rx="1.5"/><rect x="17.5" y="3" width="3.5" height="17" rx="1.5"/></svg> )}
+                            {feature.icon === 'deployment' && ( <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> )}
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">{feature.title}</h3>
@@ -85,7 +86,7 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
                         {feature.description.map(point => (
                             <li class="flex items-start">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-3 mt-1.5 text-cyan-400 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                                <span>{point}</span>
+                                <span set:html={point}></span>
                             </li>
                         ))}
                     </ul>
@@ -99,14 +100,8 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
                 <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-                            {/* FIX: 右列只保留 'ui' 和 'usability' 的图标 */}
-                            {feature.icon === 'ui' && (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                            )}
-                            {/* FIX: 将 'usability' 图标从左列移至此处 */}
-                            {feature.icon === 'usability' && (
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                            )}
+                            {feature.icon === 'ui' && ( <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg> )}
+                            {feature.icon === 'usability' && ( <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg> )}
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">{feature.title}</h3>
@@ -117,7 +112,7 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
                         {feature.description.map(point => (
                             <li class="flex items-start">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-3 mt-1.5 text-cyan-400 flex-shrink-0"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                                <span>{point}</span>
+                                <span set:html={point}></span>
                             </li>
                         ))}
                     </ul>
@@ -126,3 +121,36 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
         </div>
     </div>
 </section>
+
+<section class="max-w-6xl mx-auto px-4 pb-20 pt-8 text-sm text-slate-400 border-t border-slate-800 mt-20">
+    <h3 class="font-bold mb-4 text-slate-300">注释:</h3>
+    <ul class="space-y-3">
+        {specialTerms.map((term) => (
+            <li class="leading-relaxed" set:html={`${term.term}：${term.description}`} />
+        ))}
+    </ul>
+</section>
+
+<style>
+    /* 通用上标样式 */
+    sup {
+        vertical-align: baseline;
+        position: relative;
+        padding: 0 0.1em;
+        color: inherit;
+        text-decoration: none;
+    }
+    
+    /* 正文和注释区的上标样式 */
+    li sup, p sup, span sup {
+        top: -0.4em;
+        font-size: 0.75em;
+    }
+
+    /* 核心修复：单独为主标题 h2 内的上标设置更小、更协调的样式 */
+    h2 sup {
+        font-weight: normal; /* 取消从标题继承的加粗 */
+        font-size: 0.45em; /* 设置更小的字号，让其不那么显眼 */
+        top: -0.8em; /* 调整垂直偏移以匹配新的字号 */
+    }
+</style>
