@@ -12,29 +12,38 @@ const features = [
     icon: "dual-mode"
   },
   {
-    title: "全新现代化UI",
+    title: "全新现代化 UI",
     subtitle: "All-new Modern UI",
     description: [
-      "前端界面已使用 Vue 3、Vite 和 TypeScript 进行了彻底重构。",
+      "前端界面使用 Vue 3、Vite 和 TypeScript 进行构建。",
       "所有组件均由 shadcn/ui 和 Tailwind CSS 构建，提供了专业、美观且响应迅速的操作体验。"
     ],
     icon: "ui"
+  },
+  {
+    title: "机器人状态实时掌握",
+    subtitle: "Real-time Robot Status Monitoring",
+    description: [
+      "主界面实时展示机器人运行状态与报警信息，界面简洁直观，关键信息一目了然。",
+      "集成完善的日志输出，助力高效排查与运维，机器人各项信息获取更直接。"
+    ],
+    icon: "status"
   },
   {
     title: "个性化与易用性",
     subtitle: "Customization & Usability",
     description: [
         "内置明亮/暗黑模式一键切换，并内嵌可折叠的“严格指令参考”组件方便查阅。",
-        "打包程序一键启动，可自动打开默认浏览器并加载控制界面，极大简化了使用流程。"
+        "内置快捷分享功能，可即时生成 Web 控制页面的链接和二维码，可随时拿起手中移动设备控制。"
     ],
     icon: "usability"
   },
   {
-    title: "后端集成与部署简易",
+    title: "后端集成与配置简易",
     subtitle: "Robust Backend & Deployment",
     description: [
-        "已使用 PyInstaller 将整个应用打包为独立可执行文件，用户无需安装任何依赖即可运行。",
-        "通过外部 config.json 文件管理所有关键配置，实现了程序与配置的完全分离。"
+        "已将整个应用打包为独立可执行文件，用户无需安装任何依赖，真正实现“开箱即用”。",
+        "应用内集成设置页面，可对机器人 IP 地址、默认运动速度以及 LLM API 等关键信息修改，实现了应用内的快速配置。"
     ],
     icon: "deployment"
   },
@@ -46,22 +55,26 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
 ---
 
 <section class="max-w-6xl mx-auto px-4 py-20">
-    {/* -- MODIFIED -- Slogan 响应式优化 */}
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-20 text-slate-100">指令之间，智能与精准共生</h2>
 
-    {/*
-      核心改动:
-      - 回归 Grid 布局，但结构更清晰。
-      - 父容器是 Grid，内含两个 div 分别代表左右两列。
-    */}
     <div class="grid md:grid-cols-2 gap-8">
+        {/* 左侧列 */}
         <div class="space-y-8">
             {leftFeatures.map((feature) => (
                 <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-                            {feature.icon === 'dual-mode' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>}
-                            {feature.icon === 'usability' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>}
+                            {/* FIX: 左列只保留 'dual-mode', 'status', 'deployment' 的图标 */}
+                            {feature.icon === 'dual-mode' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="M14.5 4L9.5 20"/></svg>
+                            )}
+                            {feature.icon === 'status' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect x="3" y="13" width="3.5" height="7" rx="1.5"/><rect x="10.25" y="8" width="3.5" height="12" rx="1.5"/><rect x="17.5" y="3" width="3.5" height="17" rx="1.5"/></svg>
+                            )}
+                            {/* FIX: 将 'deployment' 图标从右列移至此处 */}
+                            {feature.icon === 'deployment' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                            )}
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">{feature.title}</h3>
@@ -80,13 +93,20 @@ const rightFeatures = features.filter((_, i) => i % 2 !== 0);
             ))}
         </div>
 
+        {/* 右侧列 */}
         <div class="space-y-8 md:mt-20">
             {rightFeatures.map((feature) => (
                 <div class="group relative p-8 rounded-2xl bg-slate-800/50 border border-slate-700 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/10">
                     <div class="flex items-center space-x-4 mb-6">
                         <div class="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-                           {feature.icon === 'ui' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>}
-                           {feature.icon === 'deployment' && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>}
+                            {/* FIX: 右列只保留 'ui' 和 'usability' 的图标 */}
+                            {feature.icon === 'ui' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                            )}
+                            {/* FIX: 将 'usability' 图标从左列移至此处 */}
+                            {feature.icon === 'usability' && (
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            )}
                         </div>
                         <div>
                             <h3 class="text-xl font-bold text-white">{feature.title}</h3>
