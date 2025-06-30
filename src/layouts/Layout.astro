@@ -26,15 +26,27 @@ const { title, description } = Astro.props;
 	</head>
 
 	<body class="bg-slate-900 text-slate-200 font-sans relative">
-		
-		{/* 4. 将背景组件放置在所有页面内容的最底层。 */}
-		<Background />
-		
-		{/* 5. <slot /> 是一个特殊的 Astro 组件，
-		  它会把使用此布局的任何页面（如 index.astro）的内容渲染到这个位置。
-		  这使得 <Background /> 成为了所有页面的共享背景。
-		*/}
-		<slot />
+		<!-- 顶部延时弹出、可关闭的横幅通知 -->
+		<div id="upgrade-banner" style="display:none;" class="w-full bg-slate-800/90 text-slate-100 text-xs px-3 py-1 flex items-center justify-center gap-2 fixed top-0 left-0 z-50 shadow-md">
+			<span>🚀 BotifyText 现代化桌面体验，全新发布！点击 <a href="https://botifytext.morlight.top" class="underline font-semibold hover:text-blue-300" target="_blank" rel="noopener">这里</a> 访问新版产品介绍页面。</span>
+			<button onclick="document.getElementById('upgrade-banner').style.display='none'" aria-label="关闭横幅" class="ml-2 text-slate-300 hover:text-white text-base font-bold focus:outline-none">×</button>
+		</div>
+		<script is:inline>
+			setTimeout(() => {
+				const banner = document.getElementById('upgrade-banner');
+				if (banner) banner.style.display = 'flex';
+			}, 15000);
+		</script>
+		<div>
+			{/* 4. 将背景组件放置在所有页面内容的最底层。 */}
+			<Background />
+			
+			{/* 5. <slot /> 是一个特殊的 Astro 组件，
+			  它会把使用此布局的任何页面（如 index.astro）的内容渲染到这个位置。
+			  这使得 <Background /> 成为了所有页面的共享背景。
+			*/}
+			<slot />
+		</div>
 
 	</body>
 </html>
